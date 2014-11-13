@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <h:outputStylesheet name="style.css" library="css" />
+    </h:head>
+    <body >
+        <ui:composition>
+
+            <div class="options">
+
+                <div class="left">  
+                    <span class="left more-links">
+                        <h:form>
+                            <ul id="drop-nav">
+                                <li><a href="index.xhtml">Home</a></li>
+                                <li><a href="index.xhtml">The Store</a>
+                                    <ul>
+                                        <c:forEach items="#{indexMB.categories}" var="c">
+                                            <li><h:commandLink value="#{c.name}" action="#{indexMB.actionFilterCategories(c)}" /> </li>
+                                        </c:forEach>
+                                    </ul>
+                                </li>
+
+                                <li><a href="contact.xhtml">Contact</a>
+
+                                </li>
+                                <li>
+                                    <h:link outcome="registerProduct" ><h:outputLabel value="New Product"></h:outputLabel> </h:link>
+                                </li>
+                             
+                            </ul>
+                        </h:form>
+                    </span> 
+
+                </div>
+
+                <div class="right"> 
+                    <h:link outcome="basket" > 
+                        <img src="/MyCompany-war/faces/javax.faces.resources/cart.png?ln=images" width="35" alt="My Cart" />
+                    </h:link> 
+
+                    <c:if  test="${'#{user.userId}' == '1'}">
+                        <h:link outcome="vendorRegistor" ><h:outputLabel value="New Vendor"></h:outputLabel></h:link>
+                        <h:link outcome="registerBrand" ><h:outputLabel value="New Brand"></h:outputLabel> </h:link>
+                    </c:if>
+
+                    <c:if  test="${'#{user.userId}' == '3'}">
+                        <h:link outcome="registerProduct" ><h:outputLabel value="New Product"></h:outputLabel> </h:link>
+                        <h:link outcome="registerBrand" ><h:outputLabel value="New Brand"></h:outputLabel></h:link>
+                    </c:if>
+                    <c:if  test="${'#{user.userId}' == '2'}">
+
+                    </c:if>
+                    <c:otherwise>
+                        <h:link outcome="login" > 
+
+                            <img src="/MyCompany-war/faces/javax.faces.resources/login.png?ln=images" width="30" alt="My Cart" />
+                        </h:link>
+                    </c:otherwise>
+
+
+                </div>
+            </div>
+            <div class="line"></div>		
+        </ui:composition>
+    </body>
+</html>
+
+

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+          
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:body>
+
+        <ui:composition template="template/common/commonLayout.xhtml">
+            
+           
+            <ui:define name="content" >
+                 
+                <h:form >
+                    <table class="basket">
+                        <tr>
+                            <td>
+                              <h:outputLabel class="myTitle">Terms and Condition</h:outputLabel>  
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="100%">
+                               <h:inputTextarea  cols="100" rows="10" value="Any item purchased from this site adhere to the terms and conditions depicted in this document. You will have to accept the terms and conditions dipicted here in order to purches anything from this site" /> 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                               <h:commandButton value="Accept Terms and Conditions" actionListener="#{customerMB.customerAdd}"/>
+                              <h:commandButton value="Back to home page" actionListener="#{customerMB.customerAdd}"/>
+                                
+                            </td>
+                        </tr>
+                    </table>
+                    
+                      
+                  
+                </h:form>
+            </ui:define>
+        </ui:composition>
+
+    </h:body>
+
+</html>

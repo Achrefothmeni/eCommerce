@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:body>
+
+        <ui:composition template="template/common/commonLayout.xhtml">
+            <ui:define name="content" >
+                <h:form>
+                    <h:messages/>
+                    <h:outputLabel class="myTitle">Cart Information</h:outputLabel>
+                    <h:panelGrid columns="2" class="basket">
+                        <h:outputLabel for="outputctype">Cart Type:</h:outputLabel>
+                        <h:selectOneMenu id="cartType" value="#{paymentCardMB.selectedCardType}">
+                            <f:selectItems value="#{paymentCardMB.cardTypes}" var="ct" itemLabel="#{ct}" itemValue="#{ct}" />
+                        </h:selectOneMenu>
+                        <h:outputLabel for="outputcnumber">Cart Number:</h:outputLabel>
+                        <h:inputText id="cnumber" value="#{paymentCardMB.card.cardNumber}" required="true"/>
+
+                        <h:outputLabel for="outputnamecart">Name on Cart:</h:outputLabel>
+                        <h:inputText id="namecart" value="#{paymentCardMB.card.nameOnCard}" required="true"/>
+
+                        <h:outputLabel for="outputexp">Expiration Date:</h:outputLabel>
+                        <h:inputText id="ExpDate" required="true" value="#{paymentCardMB.card.expDate}">
+                            <f:converter converterId="DateConverter" />
+                        </h:inputText>    
+
+                        <h:outputLabel for="outputpnumber">Code:</h:outputLabel>
+                        <h:inputText id="pnumber" required="true" value="#{paymentCardMB.card.code}" maxlength="3"/>
+
+                        <div></div>
+                        <h:commandButton value="Submit" action="#{paymentCardMB.actionSaveCard()}"/>
+                    </h:panelGrid>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+
+    </h:body>
+
+</html>

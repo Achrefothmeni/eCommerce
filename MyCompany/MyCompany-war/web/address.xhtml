@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:body>
+        <ui:composition template="template/common/commonLayout.xhtml">
+            <ui:define name="content" >
+                <h:outputLabel class="myTitle">Please register your #{addressMB.addressType} address</h:outputLabel>
+                <h:form>
+                    <h:messages />
+                    <h:panelGrid columns="2" class="register">
+
+                        <h:outputLabel for="outputaddress">Address:</h:outputLabel>
+                        <h:inputText id="address" value="#{addressMB.address.streetName}" required="true"/>
+
+                        <h:outputLabel for="lname">Address 2</h:outputLabel>
+                        <h:inputText id="addres2" value="#{addressMB.address.addressComplement}"/>
+
+                        <h:outputLabel for="outputcity">City:</h:outputLabel>
+                        <h:inputText id="city" value="#{addressMB.address.cityName}" required="true" />
+
+                        <h:outputLabel >State:</h:outputLabel>
+                        <h:inputText id="State" value="#{addressMB.address.state}" required="true" />
+
+                        <h:outputLabel >Zip:</h:outputLabel>
+                        <h:inputText id="zip" value="#{addressMB.address.zipCode}" required="true"/>
+                        <div></div>
+                        <h:commandButton value="Submit" action="#{addressMB.actionSaveAddress()}"/>
+                    </h:panelGrid>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

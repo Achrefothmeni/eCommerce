@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:body>
+
+        <ui:composition template="template/common/commonLayout.xhtml">
+            <ui:define name="content">
+                <h:form>
+                    <div class="tabbed">
+                        <!-- First Tab Content -->
+                        <div class="tab-content" style="display:block;">
+                            <div class="items">
+                                <div class="cl"></div>
+                                <ul>
+                                    <c:forEach var="item" items="#{indexMB.products}">
+                                        <li>
+                                            <div class="image"> <h:commandLink action="#{indexMB.actionProductDetails(item)}"><h:graphicImage library="images" name="#{indexMB.getImage()}" /></h:commandLink> </div>
+                                            <p> 
+                                                Description: <span><h:outputText value="#{item.name}"/></span><br />
+                                                Brand Name: <h:outputText value="#{indexMB.getBrandName(item)}"/> </p>
+                                            <p class="price">Price: <strong><h:outputText value="#{item.price}"/>USD</strong></p>
+                                        </li>
+                                    </c:forEach>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+
+    </h:body>
+
+</html>

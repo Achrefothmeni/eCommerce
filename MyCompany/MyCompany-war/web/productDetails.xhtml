@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:body>
+
+        <ui:composition template="template/common/commonLayout.xhtml">
+            <ui:define name="content" >
+                <h:outputLabel class="myTitle">#{productDetailsMB.product.name}</h:outputLabel>
+                <h:form>
+                    <table class="register" width="400px">
+                        <tr>
+                            <th class="tg-031e" rowspan="4">
+                                <h:graphicImage library="images" name="#{productDetailsMB.image}" />
+                            </th>
+                            <td >Vendor name:</td>
+                            <td >#{productDetailsMB.product.vendor.firstName}</td>
+                        </tr>
+                        <tr>
+                            <td >Category name:</td>
+                            <td >#{productDetailsMB.product.category.name}</td>
+                        </tr>
+                        <tr>
+                            <td >Price</td>
+                            <td >#{productDetailsMB.product.price}</td>
+                        </tr>
+                        <tr>
+                            <td>Quantity</td>
+                            <td>
+                                <h:selectOneMenu value="#{productDetailsMB.selectedQuantity}">
+                                    <f:converter converterId="IntegerConverter" />
+                                    <f:selectItems value="#{productDetailsMB.quantity}" var="q" itemValue="#{q}" itemLabel="#{q}" />
+                                </h:selectOneMenu>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td  colspan="3">Description: </td>
+                        </tr>
+                        <tr>
+                            <td  colspan="3">#{productDetailsMB.product.description}</td>
+                        </tr>
+                        <tr>
+                            <td  colspan="3">
+                                <h:commandButton value="Add to cart" action="#{productDetailsMB.actionAddBasket()}"/>
+                            </td>
+                        </tr>
+
+                    </table>
+
+                </h:form>
+
+            </ui:define>
+        </ui:composition>
+
+    </h:body>
+
+</html>

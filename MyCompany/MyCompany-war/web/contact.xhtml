@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:body>
+
+        <ui:composition template="template/common/commonLayout.xhtml">
+            <ui:define name="content" >
+                
+                <c:if test="#{contactUsMB.isSent()}">
+                    <h:outputLabel class="myTitle">Thank for your concerning. If your content is approvable we will contact you.</h:outputLabel>
+                    <h:form>
+                        <h:panelGrid columns="2" class="register">
+                            <h:commandButton action="#{contactUsMB.actionIndex()}" value="Go to Index" />
+                        </h:panelGrid>
+                    </h:form>
+                </c:if>
+                <c:if test="#{!contactUsMB.isSent()}">
+                    <h:outputLabel class="myTitle">Contact Us</h:outputLabel>
+                    <h:form>
+                        <h:panelGrid columns="2" class="register">
+
+                            <h:outputLabel for="username" class="blabel">First Last name:</h:outputLabel>
+                            <h:inputText id="fname" value="#{contactUsMB.customerName}"/>
+
+                            <h:outputLabel for="username">Email:</h:outputLabel>
+                            <h:inputText id="email" value="#{contactUsMB.customerEmail}"/>
+
+                            <h:outputLabel for="username">Content:</h:outputLabel>
+                            <h:inputTextarea  id="contentArea"  cols="30" rows="10" value="#{contactUsMB.content}"/>
+
+                            <div/>
+                            <h:commandButton value="Send" action="#{contactUsMB.actionSendEmail()}" />
+
+                        </h:panelGrid>
+                    </h:form>
+                </c:if>
+
+            </ui:define>
+        </ui:composition>
+
+    </h:body>
+
+</html>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:body>
+
+        <ui:composition template="template/common/commonLayout.xhtml">
+            <ui:define name="content" >
+                <h:outputLabel class="myTitle">Shopping cart</h:outputLabel>
+                <h:form> 
+                    <c:if test="#{basketMB.emptyShoppingCart}">
+                   Your basket is empty;
+                    </c:if>
+                    <c:if test="!#{basketMB.emptyShoppingCart}">
+                          <h:dataTable id="cartItemsTable" border="2" value="#{basketMB.shoppingCarts}"
+                                 var="shoppingCart" class="basket"  width="9" >
+
+                        <h:column>
+                            <f:facet name="header">#{"Product"}</f:facet>
+                            #{shoppingCart.product.name}
+
+                        </h:column>
+
+                        <h:column headerClass="columnHeader" >
+                            <f:facet name="header">#{"Quantity"}</f:facet>
+                            <h:inputText id="quantity"  size="2" value="#{shoppingCart.quantity}">
+                                <f:ajax listener="#{basketMB.actionUpdateQuantity(shoppingCart)}" render="quantity" />
+                            </h:inputText>
+                        </h:column>
+
+                        <h:column headerClass="columnHeader" >
+                            <f:facet name="header">#{"Unit Price"}</f:facet>
+                            #{shoppingCart.product.price}
+                        </h:column>
+
+                        <h:column headerClass="columnHeader" >
+                            <f:facet name="header">#{"Total Cost"}</f:facet>
+                            #{shoppingCart.product.price * shoppingCart.quantity}
+                        </h:column>
+                        <h:column headerClass="columnHeader" >
+                            <f:facet name="header">#{"Action"}</f:facet>
+                            <h:commandButton value="Delete Product" actionListener="#{basketMB.actionRemoveProduct(shoppingCart)}" />
+                        </h:column>
+                    </h:dataTable>
+                    </c:if>
+                    
+                    
+                    <div style="height: 15px;"/>
+<!--                    <h:outputText value="Blah blah" />-->
+                    <div style="height: 15px;"/>
+                    <h:messages class="errorMsg"/>  
+
+
+                    <p class="buttonRow">
+                        <h:commandButton value="Continue Shopping" action="index"/> 
+                        <h:commandButton id="checkout" value="Checkout" action="#{basketMB.actionCheckOut()}">
+                        </h:commandButton> 
+                        <h:commandButton  value="Save Cart" >
+                            <f:param name="url" value="basket.xhtml" /> 
+                            <f:param name ="requirement" value="SAVE_CART" />
+                        </h:commandButton>
+
+                    </p>
+                </h:form>
+
+
+            </ui:define>
+        </ui:composition>
+
+    </h:body>
+
+</html>

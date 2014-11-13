@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:body>
+
+        <ui:composition template="/template/common/commonLayout.xhtml">
+            <ui:define name="content" >
+                <h:outputLabel class="myTitle">Customer Register</h:outputLabel>
+                <h:form >
+
+                    <h:panelGrid columns="2" class="register">
+
+                        <h:outputLabel for="category" class="blabel">Category:</h:outputLabel>
+
+                        <h:selectOneMenu value="#{productMB.product.category}" id="category">
+                            <f:converter converterId="CategoryConverter"/>
+                            <f:selectItems value="#{productMB.categories}" var="c" itemLabel="#{c.name}" itemValue="#{c}"/>
+                        </h:selectOneMenu>
+
+                        <h:outputLabel for="brand" class="blabel"> Brand: </h:outputLabel>
+                        <h:selectOneMenu value="#{productMB.brand}" id="brand">
+                            <f:converter converterId="BrandConverter"/>
+                            <f:selectItems value="#{productMB.brands}" var="b" itemLabel="#{b.name}" itemValue="#{b}"/>
+                        </h:selectOneMenu>
+
+                        <h:outputLabel for="name">Name:</h:outputLabel>
+                        <h:inputText id="name" value="#{productMB.product.name}" required="true"/>
+
+                        <h:outputLabel for="price">Price:</h:outputLabel>
+                        <h:inputText id="price" value="#{productMB.product.price}" required="true">
+                            <f:validateDoubleRange maximum="100000.00" minimum="0.1"/>
+                        </h:inputText>
+
+                        <h:outputLabel for="desc">Description :</h:outputLabel>
+                        <h:inputTextarea id="Description" value="#{productMB.product.description}"/>
+
+                        <div></div>
+                        <h:commandButton value="Submit" actionListener="#{productMB.addProduct}"/>
+
+                    </h:panelGrid>
+                </h:form>
+
+            </ui:define>
+        </ui:composition>
+
+    </h:body>
+
+</html>
